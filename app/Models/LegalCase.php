@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class LegalCase extends Model
 {
     use HasFactory;
-    protected $fillable = ['client_id', 'title', 'description', 'case_number', 'status', 'filing_date', 'closing_date'];
+    protected $fillable = ['client_id', 'title', 'description', 'case_number', 'status', 'filing_date', 'closing_date', 'court_specification_id'];
 
     public function client()
     {
@@ -34,5 +34,30 @@ class LegalCase extends Model
     public function documents()
     {
         return $this->hasMany(Document::class);
+    }
+
+    public function timeEntries()
+    {
+        return $this->hasMany(TimeEntry::class);
+    }
+
+    public function getTotalMinutesAttribute()
+    {
+        return $this->timeEntries()->sum('duration_minutes');
+    }
+
+    public function getTotalHoursAttribute()
+    {
+        return round($this->total_minutes / 60, 2);
+    }
+
+    public function courtSpecification()
+    {
+        return $this->belongsTo(CourtSpecification::class);
+    }
+
+    public function transfers()
+    {
+        return $this->hasMany(LegalCaseTransfer::class);
     }
 }

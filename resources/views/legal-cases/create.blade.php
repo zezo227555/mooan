@@ -35,6 +35,18 @@
 
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
+                            <select name="court_specification_id" class="form-select">
+                                <option value="">اختر المحكمة المختصة</option>
+                                @foreach ($courtSpecifications as $court)
+                                    <option value="{{ $court->id }}">{{ $court->name }}</option>
+                                @endforeach
+                            </select>
+                            <label>المحكمة المختصة</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
                             <input type="text" name="description" class="form-control" placeholder="الوصف">
                             <label for="floatingInput">الوصف</label>
                         </div>

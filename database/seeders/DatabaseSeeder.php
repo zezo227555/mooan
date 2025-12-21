@@ -8,12 +8,45 @@ use App\Models\Client;
 use App\Models\LegalCase;
 use App\Models\CaseNote;
 use App\Models\Document;
+use App\Models\CourtSpecification;
 use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        $courts = [
+            [
+                'name' => 'محكمة مدنية',
+                'code' => 'civil',
+                'description' => 'القضايا المدنية والنزاعات بين الأفراد',
+            ],
+            [
+                'name' => 'محكمة جنائية',
+                'code' => 'criminal',
+                'description' => 'القضايا الجنائية والجرائم',
+            ],
+            [
+                'name' => 'محكمة إدارية',
+                'code' => 'administrative',
+                'description' => 'النزاعات مع الجهات الإدارية',
+            ],
+            [
+                'name' => 'محكمة تجارية',
+                'code' => 'commercial',
+                'description' => 'قضايا الشركات والمعاملات التجارية',
+            ],
+            [
+                'name' => 'محكمة أحوال شخصية',
+                'code' => 'personal_status',
+                'description' => 'الزواج، الطلاق، الميراث، الحضانة',
+            ],
+        ];
+
+        foreach ($courts as $court) {
+            CourtSpecification::updateOrCreate(['code' => $court['code']], $court);
+        }
+
         // Create test users
         $admin = User::create([
             'name' => 'Admin User',

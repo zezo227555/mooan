@@ -23,21 +23,37 @@
 
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input type="text" name="title" class="form-control" placeholder="العنوان" value="{{ $legalCase->title }}">
+                            <input type="text" name="title" class="form-control" placeholder="العنوان"
+                                value="{{ $legalCase->title }}">
                             <label for="floatingInput">العنوان</label>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input type="text" name="case_number" class="form-control" placeholder="رقم القضية" value="{{ $legalCase->case_number }}">
+                            <input type="text" name="case_number" class="form-control" placeholder="رقم القضية"
+                                value="{{ $legalCase->case_number }}">
                             <label for="floatingInput">رقم القضية</label>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input type="text" name="description" class="form-control" placeholder="الوصف" value="{{ $legalCase->description }}">
+                            <select name="court_specification_id" class="form-select">
+                                @foreach ($courtSpecifications as $court)
+                                    <option value="{{ $court->id }}" @selected($legalCase->court_specification_id == $court->id)>
+                                        {{ $court->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            <label>المحكمة المختصة</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="text" name="description" class="form-control" placeholder="الوصف"
+                                value="{{ $legalCase->description }}">
                             <label for="floatingInput">الوصف</label>
                         </div>
                     </div>
@@ -56,14 +72,16 @@
 
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input type="date" name="filing_date" class="form-control" placeholder="تاريخ الابلاغ" value="{{ $legalCase->filing_date }}">
+                            <input type="date" name="filing_date" class="form-control" placeholder="تاريخ الابلاغ"
+                                value="{{ $legalCase->filing_date }}">
                             <label for="floatingInput">تاريخ الابلاغ</label>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input type="date" name="closing_date" class="form-control" placeholder="تاريخ الاغلاق" value="{{ $legalCase->closing_date }}">
+                            <input type="date" name="closing_date" class="form-control" placeholder="تاريخ الاغلاق"
+                                value="{{ $legalCase->closing_date }}">
                             <label for="floatingInput">تاريخ الاغلاق</label>
                         </div>
                     </div>

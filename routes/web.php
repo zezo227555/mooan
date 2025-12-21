@@ -3,9 +3,13 @@
 use App\Http\Controllers\CaseNoteController;
 use App\Http\Controllers\CaseUserController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\CourtSpecificationController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\InvoiceItemController;
 use App\Http\Controllers\LegalCaseController;
+use App\Http\Controllers\TimeEntryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,6 +36,14 @@ Route::middleware('auth')->group(function () {
     Route::prefix('legal-cases/{legal_case}')->group(function () {
         Route::resource('case-notes', CaseNoteController::class);
     });
+
+    Route::prefix('legal-cases/{legal_case}')->group(function () {
+        Route::resource('time-entries', TimeEntryController::class);
+    });
+
+    Route::post('legal-cases/{legalCase}/transfer', [LegalCaseController::class, 'transfer'])->name('legal-cases.transfer');
+
+    Route::resource('court-specifications', CourtSpecificationController::class);
 });
 
 require __DIR__ . '/auth.php';

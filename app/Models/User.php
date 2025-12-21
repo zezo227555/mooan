@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(LegalCase::class, 'case_user')->withPivot('role')->withTimestamps();
     }
+
+    public function timeEntries()
+    {
+        return $this->hasMany(TimeEntry::class);
+    }
 }
