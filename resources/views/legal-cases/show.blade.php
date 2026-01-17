@@ -101,6 +101,99 @@
             </x-slot>
         </x-card>
 
+        {{-- 🧾 Invoice Items Overview --}}
+        <x-card title="ملخص الفواتير" class="mt-3">
+            <x-slot name="body">
+
+                @if ($legalCase->invoices->isEmpty())
+                    <div class="text-muted text-center">
+                        لا توجد فواتير لهذه القضية
+                    </div>
+                @else
+                    @foreach ($legalCase->invoices as $invoice)
+                        <div class="border rounded p-3 mb-3">
+
+                            {{-- Invoice Header --}}
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <div>
+                                    <strong>فاتورة رقم:</strong> {{ $invoice->invoice_number }} <br>
+                                    <small class="text-muted">
+                                        {{ $invoice->issue_date }} |
+                                        الحالة:
+                                        <span class="badge bg-secondary">
+                                            {{ $invoice->status }}
+                                        </span>
+                                    </small>
+                                </div>
+
+                                <div>
+                                    <strong>{{ number_format($invoice->total_amount, 2) }} د.ل</strong>
+                                </div>
+                            </div>
+
+                            {{-- Invoice Items --}}
+                            @if ($invoice->items->isEmpty())
+                                <div class="text-muted">
+                                    لا توجد بنود مضافة بعد
+                                </div>
+                            @else
+                                <table class="table table-sm table-bordered mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>الوصف</th>
+                                            <th class="text-center">الكمية</th>
+                                            <th class="text-center">سعر الوحدة</th>
+                                            <th class="text-center">الإجمالي</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($invoice->items as $item)
+                                            <tr>
+                                                <td>{{ $item->description }}</td>
+                                                <td class="text-center">{{ $item->quantity }}</td>
+                                                <td class="text-center">
+                                                    {{ number_format($item->unit_price, 2) }}
+                                                </td>
+                                                <td class="text-center">
+                                                    {{ number_format($item->total_amount, 2) }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            @endif
+
+                            {{-- Invoice Actions --}}
+                            <div class="mt-2 d-flex justify-content-end gap-2">
+
+                                {{-- Add Item (Draft Only) --}}
+                                @if ($invoice->status === 'draft')
+                                    <a href="{{ route('invoice-items.create', $invoice->id) }}"
+                                        class="btn btn-sm btn-success">
+                                        + إضافة بند
+                                    </a>
+                                @else
+                                    <span class="badge bg-light text-muted align-self-center">
+                                        الفاتورة مقفلة
+                                    </span>
+                                @endif
+
+                                {{-- View Invoice --}}
+                                <a href="{{ route('invoices.show', $invoice->id) }}"
+                                    class="btn btn-sm btn-outline-primary">
+                                    عرض الفاتورة
+                                </a>
+
+                            </div>
+
+                        </div>
+                    @endforeach
+                @endif
+
+            </x-slot>
+        </x-card>
+
+
         {{-- Documents --}}
         <x-card title="المستندات" class="mt-4">
             <x-slot name="body">

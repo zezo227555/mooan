@@ -81,6 +81,11 @@
                                                     href="{{ route('case-users.index', $case->id) }}">الموظفين</a></li>
                                             <li><a class="dropdown-item"
                                                     href="{{ route('case-notes.index', $case->id) }}">الملاحظات</a></li>
+                                            <li><a href="{{ route('legal-cases.invoices.create', $case->id) }}"
+                                                    class="dropdown-item">
+                                                    إنشاء فاتورة
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>

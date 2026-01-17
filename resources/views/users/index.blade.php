@@ -11,10 +11,10 @@
                 <thead>
                     <tr>
                         <th>الاسم</th>
-                        <th>الايميل</th>
-                        <th>رقم الهاتف</th>
-                        <th>الصلاحية</th>
-                        <th>اجراء</th>
+                        <th>البريد الإلكتروني</th>
+                        <th>الدور</th>
+                        <th>الحالة</th>
+                        <th>إجراء</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -22,17 +22,35 @@
                         <tr>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
-                            <td>{{ $user->phone }}</td>
-                            <td>{{ $user->role }}</td>
                             <td>
-                                <a href="{{ route('users.show', $user->id) }}" class="btn btn-sm btn-info-transparent btn-b">عرض</a>
-                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-sm btn-warning-transparent">تعديل</a>
+                                <span class="badge bg-info">
+                                    {{ $user->role }}
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge bg-{{ $user->is_active ? 'success' : 'secondary' }}">
+                                    {{ $user->is_active ? 'نشط' : 'معطل' }}
+                                </span>
+                            </td>
+                            <td>
+                                <a href="{{ route('users.show', $user->id) }}"
+                                    class="btn btn-sm btn-primary-transparent">عرض</a>
+
+                                <a href="{{ route('users.edit', $user->id) }}"
+                                    class="btn btn-sm btn-warning-transparent">تعديل</a>
+
                                 <x-delete-form action="{{ route('users.destroy', $user->id) }}" />
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
+        </x-slot>
+
+        <x-slot name="footer">
+            <a href="{{ route('users.create') }}" class="btn btn-primary">
+                + إضافة مستخدم
+            </a>
         </x-slot>
     </x-card>
 @endsection

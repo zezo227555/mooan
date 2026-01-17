@@ -55,7 +55,7 @@ class LegalCaseController extends Controller
 
     public function show(LegalCase $legalCase)
     {
-        $legalCase->load(['client', 'courtSpecification', 'documents', 'notes', 'timeEntries', 'users', 'transfers' => fn($query) => $query->with(['fromCourt', 'toCourt', 'user'])->latest()]);
+        $legalCase->load(['invoices.items', 'client', 'courtSpecification', 'documents', 'notes', 'timeEntries', 'users', 'transfers' => fn($query) => $query->with(['fromCourt', 'toCourt', 'user'])->latest()]);
 
         $courts = CourtSpecification::all();
 

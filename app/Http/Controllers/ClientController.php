@@ -25,12 +25,12 @@ class ClientController extends Controller
     {
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
-            'last_name'  => 'required|string|max:255',
-            'email'      => 'nullable|email|unique:clients,email',
-            'phone'      => 'nullable|string|max:20',
-            'address'    => 'nullable|string|max:255',
-            'national_id'=> 'nullable|string|max:50',
-            'notes'      => 'nullable|string',
+            'last_name' => 'required|string|max:255',
+            'email' => 'nullable|email|unique:clients,email',
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'national_id' => 'nullable|string|max:50',
+            'notes' => 'nullable|string',
         ]);
 
         Client::create($validated);
@@ -40,6 +40,10 @@ class ClientController extends Controller
     // GET /clients/{client}
     public function show(Client $client)
     {
+        $client->load([
+            'cases' => fn($q) => $q->latest(),
+        ]);
+
         return view('clients.show', compact('client'));
     }
 
@@ -54,12 +58,12 @@ class ClientController extends Controller
     {
         $validated = $request->validate([
             'first_name' => 'required|string|max:255',
-            'last_name'  => 'required|string|max:255',
-            'email'      => 'nullable|email|unique:clients,email,' . $client->id,
-            'phone'      => 'nullable|string|max:20',
-            'address'    => 'nullable|string|max:255',
-            'national_id'=> 'nullable|string|max:50',
-            'notes'      => 'nullable|string',
+            'last_name' => 'required|string|max:255',
+            'email' => 'nullable|email|unique:clients,email,' . $client->id,
+            'phone' => 'nullable|string|max:20',
+            'address' => 'nullable|string|max:255',
+            'national_id' => 'nullable|string|max:50',
+            'notes' => 'nullable|string',
         ]);
 
         $client->update($validated);

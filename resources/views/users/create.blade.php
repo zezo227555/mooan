@@ -1,57 +1,68 @@
 @extends('layouts.main-body-structer')
 
 @section('page-title')
-    المستخدمين
+    إضافة مستخدم
 @endsection
 
 @section('content')
-    <x-card title="اضافة مستخدم">
+    <x-card title="إضافة مستخدم جديد">
         <x-slot name="body">
-            <form action="{{ route('users.store') }}" method="POST">
+            <form method="POST" action="{{ route('users.store') }}">
                 @csrf
+
                 <div class="row">
+
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input type="text" name="name" class="form-control" placeholder="الاسم">
-                            <label for="floatingInput">الاسم</label>
+                            <input type="text" name="name" class="form-control" placeholder="الاسم" required>
+                            <label>الاسم</label>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input type="email" name="email" class="form-control" placeholder="البريد الالكتروني">
-                            <label for="floatingInput">البريد الالكتروني</label>
+                            <input type="email" name="email" class="form-control" placeholder="البريد الإلكتروني"
+                                required>
+                            <label>البريد الإلكتروني</label>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
                             <input type="text" name="phone" class="form-control" placeholder="رقم الهاتف">
-                            <label for="floatingInput">رقم الهاتف</label>
+                            <label>رقم الهاتف</label>
                         </div>
                     </div>
 
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
-                            <input type="password" name="password" class="form-control" placeholder="كلمة المرور">
-                            <label for="floatingInput">كلمة المرور</label>
+                            <select name="role" class="form-select" required>
+                                <option value="admin">مدير</option>
+                                <option value="attorney">محامي</option>
+                                <option value="reception">استقبال</option>
+                            </select>
+                            <label>الدور</label>
                         </div>
                     </div>
 
                     <div class="col-md-6">
-                        <div class="form-floating">
-                            <select class="form-select" name="role">
-                                <option value="customer">زبون</option>
-                                <option value="admin">مدير</option>
-                                <option value="staff">موظف</option>
-                                <option value="logistics">لوجستيات</option>
-                            </select>
-                            <label for="floatingSelect">الصلاحية</label>
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password" class="form-control" placeholder="كلمة المرور" required>
+                            <label>كلمة المرور</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password_confirmation" class="form-control"
+                                placeholder="تأكيد كلمة المرور" required>
+                            <label>تأكيد كلمة المرور</label>
                         </div>
                     </div>
 
                 </div>
-                <button type="submit" role="submit" class="btn btn-primary mt-2">حفظ البيانات</button>
+
+                <button class="btn btn-primary">حفظ</button>
             </form>
         </x-slot>
     </x-card>

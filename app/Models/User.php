@@ -2,53 +2,56 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
-use App\DataSelectTypes;
-use App\UserRoles;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
-    protected $fillable = ['name', 'email'];
+    const ROLE_ADMIN = 'admin';
+    const ROLE_ATTORNEY = 'attorney';
+    const ROLE_RECEPTION = 'reception';
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
+    protected $fillable = ['name', 'email', 'phone', 'role', 'is_active', 'password'];
+
     protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    protected $casts = [
+        'is_active' => 'boolean',
+        'last_login_at' => 'datetime',
+    ];
+
+    /* =====================
+        Role Helpers
+    ===================== */
+
+    public function isAdmin(): bool
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->role === self::ROLE_ADMIN;
     }
 
-    public function legalCases()
+    public function isAttorney(): bool
     {
-        return $this->belongsToMany(LegalCase::class, 'case_user')->withPivot('role')->withTimestamps();
+        return $this->role === self::ROLE_ATTORNEY;
     }
+
+    public function isReception(): bool
+    {
+        return $this->role === self::ROLE_RECEPTION;
+    }
+
+    /* =====================
+        Relationships
+    ===================== */
 
     public function timeEntries()
     {
         return $this->hasMany(TimeEntry::class);
+    }
+
+    public function legalCases()
+    {
+        return $this->belongsToMany(LegalCase::class)->withPivot('role')->withTimestamps();
     }
 }

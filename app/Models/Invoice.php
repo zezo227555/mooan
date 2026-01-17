@@ -9,16 +9,11 @@ class Invoice extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['legal_case_id', 'client_id', 'issue_date', 'due_date', 'total_amount', 'status', 'notes'];
+    protected $fillable = ['legal_case_id', 'invoice_number', 'issue_date', 'due_date', 'status', 'total_amount'];
 
-    public function case()
+    public function legalCase()
     {
-        return $this->belongsTo(LegalCase::class, 'legal_case_id');
-    }
-
-    public function client()
-    {
-        return $this->belongsTo(Client::class, 'client_id');
+        return $this->belongsTo(LegalCase::class);
     }
 
     public function items()

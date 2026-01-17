@@ -60,4 +60,9 @@ class LegalCase extends Model
     {
         return $this->hasMany(LegalCaseTransfer::class);
     }
+
+    public function invoices()
+    {
+        return $this->hasMany(Invoice::class);
+    }
 }

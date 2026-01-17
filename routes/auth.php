@@ -6,6 +6,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\ClientAuthController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [RegisteredUserController::class, 'store'])
@@ -39,3 +40,10 @@ Route::post('/email/verification-notification', [EmailVerificationNotificationCo
 Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])
     ->middleware('auth')
     ->name('logout');
+
+    Route::prefix('client')->name('client.')->group(function () {
+    Route::get('login', [ClientAuthController::class, 'showLoginForm'])->name('login');
+    Route::post('login', [ClientAuthController::class, 'login']);
+    Route::post('logout', [ClientAuthController::class, 'logout'])->name('logout');
+});
+

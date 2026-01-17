@@ -4,6 +4,8 @@ namespace Database\Factories;
 
 use App\Models\Client;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
+use Pest\Support\Str;
 
 class ClientFactory extends Factory
 {
@@ -19,6 +21,11 @@ class ClientFactory extends Factory
             'address' => $this->faker->address,
             'national_id' => $this->faker->numerify('##########'),
             'notes' => $this->faker->sentence,
+
+            // 🔐 Auth fields (NEW)
+            'password' => Hash::make('password'), // default test password
+            'remember_token' => Str::random(10),
+            'email_verified_at' => now(),
         ];
     }
 }

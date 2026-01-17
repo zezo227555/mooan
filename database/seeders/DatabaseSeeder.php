@@ -47,49 +47,53 @@ class DatabaseSeeder extends Seeder
             CourtSpecification::updateOrCreate(['code' => $court['code']], $court);
         }
 
-        // Create test users
-        $admin = User::create([
-            'name' => 'Admin User',
-            'email' => 'admin@firm.test',
+        // 🔑 Admin
+        User::create([
+            'name' => 'System Admin',
+            'email' => 'admin@lawfirm.test',
+            'phone' => '0910000000',
+            'role' => User::ROLE_ADMIN,
             'password' => Hash::make('password'),
+            'is_active' => true,
         ]);
 
-        $attorney = User::create([
-            'name' => 'Jane Attorney',
-            'email' => 'attorney@firm.test',
+        // ⚖️ Attorneys
+        User::create([
+            'name' => 'Ahmed Attorney',
+            'email' => 'attorney1@lawfirm.test',
+            'phone' => '0921111111',
+            'role' => User::ROLE_ATTORNEY,
             'password' => Hash::make('password'),
+            'is_active' => true,
         ]);
 
-        $paralegal = User::create([
-            'name' => 'Sam Paralegal',
-            'email' => 'paralegal@firm.test',
+        User::create([
+            'name' => 'Sara Attorney',
+            'email' => 'attorney2@lawfirm.test',
+            'phone' => '0922222222',
+            'role' => User::ROLE_ATTORNEY,
             'password' => Hash::make('password'),
+            'is_active' => true,
+        ]);
+
+        // 🧾 Reception
+        User::create([
+            'name' => 'Reception Desk',
+            'email' => 'reception@lawfirm.test',
+            'phone' => '0933333333',
+            'role' => User::ROLE_RECEPTION,
+            'password' => Hash::make('password'),
+            'is_active' => true,
         ]);
 
         // Create clients
         $clients = Client::factory(10)->create();
 
+        $CourtSpecification = CourtSpecification::all('id');
+
         // For each client, create 1–3 legal cases
-        $clients->each(function ($client) use ($admin, $attorney, $paralegal) {
-            $cases = LegalCase::factory(rand(1, 3))->create(['client_id' => $client->id]);
-
-            foreach ($cases as $case) {
-                // Assign users
-                $case->users()->attach($attorney->id, ['role' => 'attorney']);
-                $case->users()->attach($paralegal->id, ['role' => 'paralegal']);
-
-                // Add notes
-                CaseNote::factory(rand(2, 4))->create([
-                    'legal_case_id' => $case->id,
-                    'user_id' => $attorney->id,
-                ]);
-
-                // Add documents
-                Document::factory(rand(1, 3))->create([
-                    'legal_case_id' => $case->id,
-                    'user_id' => $paralegal->id,
-                ]);
-            }
+        $clients->each(function ($client) use ($CourtSpecification) {
+            $cases = LegalCase::factory(rand(1, 3))->create(['client_id' => $client->id, 'court_specification_id' => $CourtSpecification->random()->id]);
         });
     }
 }

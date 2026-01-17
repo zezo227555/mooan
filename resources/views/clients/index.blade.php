@@ -25,7 +25,7 @@
                             <td>{{ $client->phone }}</td>
                             <td>{{ $client->email }}</td>
                             <td>
-                                {{-- <a href="{{ route('clients.show', $client->id) }}" class="btn btn-sm btn-info-transparent btn-b">عرض</a> --}}
+                                <a href="{{ route('clients.show', $client->id) }}" class="btn btn-sm btn-info-transparent btn-b">عرض</a>
                                 <a href="{{ route('clients.edit', $client->id) }}" class="btn btn-sm btn-warning-transparent">تعديل</a>
                                 <x-delete-form action="{{ route('clients.destroy', $client->id) }}" />
                             </td>

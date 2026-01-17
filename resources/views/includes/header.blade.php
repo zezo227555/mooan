@@ -550,7 +550,7 @@
                  <ul class="main-header-dropdown dropdown-menu overflow-hidden header-profile-dropdown dropdown-menu-end"
                      aria-labelledby="mainHeaderProfile">
                      <li>
-                         <a class="dropdown-item d-flex" href="{{ route('account') }}">
+                         <a class="dropdown-item d-flex" href="{{ route('profile.show') }}">
                              <i class="ti ti-user-circle fs-18 me-2 op-7"></i>حسابي
                          </a>
                      </li>
