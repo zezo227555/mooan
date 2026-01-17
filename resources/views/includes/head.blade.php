@@ -2,7 +2,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>{{ env('APP_NAME') }}</title>
+<title>نظام معين</title>
 <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
 <meta name="Author" content="Spruko Technologies Private Limited">
 <meta name="keywords"
