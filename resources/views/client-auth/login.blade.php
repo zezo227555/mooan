@@ -25,7 +25,7 @@
 @section('content')
     <div class="card custom-card">
         <div class="card-body p-5">
-            <p class="h5 fw-semibold mb-2 text-center">تسجيل الدخول</p>
+            <p class="h5 fw-semibold mb-2 text-center">تسجيل دخول العميل</p>
             @if ($errors->has('login_error'))
                 <div class="alert alert-danger" role="alert">
                     {{ $errors->first('login_error') }}
@@ -35,9 +35,9 @@
                 @csrf
                 <div class="row gy-3">
                     <div class="col-xl-12">
-                        <label for="signin-username" class="form-label text-default">اسم المستحدم</label>
+                        <label for="signin-username" class="form-label text-default">ايميل العميل</label>
                         <input type="email" name="email" class="form-control form-control-lg" id="signin-username"
-                            placeholder="اسم المستخدم">
+                            placeholder="name@example.com">
                     </div>
                     <div class="col-xl-12 mb-2">
                         <label for="signin-password" class="form-label text-default d-block">كلمة المرور</label>

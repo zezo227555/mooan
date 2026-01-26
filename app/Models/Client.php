@@ -27,4 +27,14 @@ class Client extends Authenticatable
     {
         return "{$this->first_name} {$this->last_name}";
     }
+
+    public function notifications()
+    {
+        return $this->morphMany(Notification::class, 'notifiable')->latest();
+    }
+
+    public function unreadNotifications()
+    {
+        return $this->notifications()->whereNull('read_at');
+    }
 }

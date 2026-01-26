@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\NotificationHelper;
 use App\Models\LegalCase;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ class CaseUserController extends Controller
     public function index(LegalCase $legalCase)
     {
         $assignedUsers = $legalCase->users;
-        $allUsers = User::all();
+        $allUsers = User::where('role', 'attorney')->get();
         return view('case-users.index', compact('legalCase', 'assignedUsers', 'allUsers'));
     }
 
@@ -21,12 +22,24 @@ class CaseUserController extends Controller
     {
         $request->validate([
             'user_id' => 'required|exists:users,id',
-            'role'    => 'required|string|max:100',
+            'role' => 'required|string|max:100',
         ]);
 
         $legalCase->users()->syncWithoutDetaching([
-            $request->user_id => ['role' => $request->role]
+            $request->user_id => ['role' => $request->role],
         ]);
+
+        foreach ($legalCase->users() as $user) {
+            NotificationHelper::notify(
+                $user, // the attorney
+                [
+                    'type' => 'case_assigned',
+                    'title' => 'تم إسناد قضية',
+                    'message' => 'تم إسناد قضية رقم ' . $legalCase->case_number,
+                    'url' => route('legal-cases.show', $legalCase->id),
+                ],
+            );
+        }
 
         return redirect()->route('case-users.index', $legalCase->id)->with('success', 'User assigned to case.');
     }

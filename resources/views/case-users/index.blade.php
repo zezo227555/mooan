@@ -60,12 +60,7 @@
                     <label class="form-label">دور الموظف فالقضية</label>
                     <select name="role" data-trigger class="form-control choices-multiple-groups-all">
                         <option value="attorney">Attorney</option>
-                        <option value="paralegal">Paralegal</option>
-                        <option value="admin">Admin</option>
                         <option value="intern">Intern</option>
-                        <option value="manager">Manager</option>
-                        <option value="staff">Staff</option>
-                        <option value="client">Client</option>
                     </select>
                 </div>
             </div>

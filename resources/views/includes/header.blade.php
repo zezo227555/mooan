@@ -85,145 +85,7 @@
              <!-- End::header-element -->
 
              <!-- Start::header-element -->
-             <div class="header-element notifications-dropdown">
-                 <!-- Start::header-link|dropdown-toggle -->
-                 <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="dropdown"
-                     data-bs-auto-close="outside" id="messageDropdown" aria-expanded="false">
-                     <svg class="header-link-icon" xmlns="http://www.w3.org/2000/svg"
-                         xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24"
-                         viewBox="0 0 24 24">
-                         <path
-                             d="M10 21H14C14 22.1 13.1 23 12 23S10 22.1 10 21M21 19V20H3V19L5 17V11C5 7.9 7 5.2 10 4.3V4C10 2.9 10.9 2 12 2S14 2.9 14 4V4.3C17 5.2 19 7.9 19 11V17L21 19M17 11C17 8.2 14.8 6 12 6S7 8.2 7 11V18H17V11Z" />
-                     </svg>
-                     <span class="badge bg-secondary rounded-pill header-icon-badge pulse pulse-secondary"
-                         id="notification-icon-badge">5</span>
-                 </a>
-                 <!-- End::header-link|dropdown-toggle -->
-                 <!-- Start::main-header-dropdown -->
-                 <div class="main-header-dropdown dropdown-menu dropdown-menu-end" data-popper-placement="none">
-                     <div class="p-3">
-                         <div class="d-flex align-items-center justify-content-between">
-                             <p class="mb-0 fs-17 fw-semibold">Notifications</p>
-                             <span class="badge bg-secondary-transparent" id="notifiation-data">5 Unread</span>
-                         </div>
-                     </div>
-                     <div class="dropdown-divider"></div>
-                     <ul class="list-unstyled p-2" id="header-notification-scroll">
-                         <li class="dropdown-item d-flex align-items-start">
-                             <div class="pe-2">
-                                 <span class="avatar avatar-md bg-primary-transparent avatar-rounded"><i
-                                         class="fe fe-message-square fs-18"></i></span>
-                             </div>
-                             <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                 <a href="notification-list.html">
-                                     <p class=" mb-0 fw-semibold text-dark">Gladys Dare <span
-                                             class="text-muted">commented on</span>
-                                         Ecosystems</p>
-                                     <span class="text-muted">2m ago</span>
-                                 </a>
-                                 <div>
-                                     <a href="javascript:void(0);"
-                                         class="min-w-fit-content text-muted me-1 dropdown-item-close1"><i
-                                             class="ti ti-x fs-16"></i></a>
-                                 </div>
-                             </div>
-                         </li>
-                         <li class="dropdown-item d-flex align-items-start">
-                             <div class="pe-2">
-                                 <span class="avatar avatar-md bg-secondary-transparent avatar-rounded"><i
-                                         class="fe fe-user fs-18"></i></span>
-                             </div>
-                             <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                 <a href="notification-list.html">
-                                     <p class=" mb-0 fw-semibold text-dark">Gladys Dare <span
-                                             class="text-muted">commented on</span>
-                                         Ecosystems</p>
-                                     <span class="text-muted">2m ago</span>
-                                 </a>
-                                 <div>
-                                     <a href="javascript:void(0);"
-                                         class="min-w-fit-content text-muted me-1 dropdown-item-close1"><i
-                                             class="ti ti-x fs-16"></i></a>
-                                 </div>
-                             </div>
-                         </li>
-                         <li class="dropdown-item d-flex align-items-start">
-                             <div class="pe-2">
-                                 <span class="avatar avatar-md bg-pink-transparent avatar-rounded"><i
-                                         class="fe fe-check fs-18"></i></span>
-                             </div>
-                             <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                 <a href="notification-list.html">
-                                     <p class="text-dark mb-0 fw-semibold">Laurel <span
-                                             class="text-muted">donated</span> <span
-                                             class="text-success fw-semibold">$100</span> <span
-                                             class="text-muted">for</span> carbon removal</p>
-                                     <span class="text-muted">15 min ago</span>
-                                 </a>
-                                 <div>
-                                     <a href="javascript:void(0);"
-                                         class="min-w-fit-content text-muted me-1 dropdown-item-close1"><i
-                                             class="ti ti-x fs-16"></i></a>
-                                 </div>
-                             </div>
-                         </li>
-                         <li class="dropdown-item d-flex align-items-start">
-                             <div class="pe-2">
-                                 <span class="avatar avatar-md bg-warning-transparent avatar-rounded"><i
-                                         class="ti ti-circle-check fs-18"></i></span>
-                             </div>
-                             <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                 <a href="notification-list.html">
-                                     <p class="mb-0 fw-semibold text-dark">Sunny Grahm <span class="text-muted">voted
-                                             for</span> carbon capture
-                                     </p>
-                                     <span class="text-muted">2 min ago</span>
-                                 </a>
-                                 <div>
-                                     <a href="javascript:void(0);"
-                                         class="min-w-fit-content text-muted me-1 dropdown-item-close1"><i
-                                             class="ti ti-x fs-16"></i></a>
-                                 </div>
-                             </div>
-                         </li>
-                         <li class="dropdown-item d-flex align-items-start">
-                             <div class="pe-2">
-                                 <span class="avatar avatar-md bg-success-transparent avatar-rounded"><i
-                                         class="ti ti-clock fs-18"></i></span>
-                             </div>
-                             <div class="flex-grow-1 d-flex align-items-center justify-content-between">
-                                 <a href="notification-list.html">
-                                     <p class=" mb-0 fw-semibold text-dark">Laurel
-                                         <span class="text-muted">donated</span>
-                                         <span class="text-success fw-semibold">$100</span>
-                                         <span class="text-muted">for</span> carbon removal
-                                     </p>
-                                     <span class="text-muted">2 Hour ago</span>
-                                 </a>
-                                 <div>
-                                     <a href="javascript:void(0);"
-                                         class="min-w-fit-content text-muted me-1 dropdown-item-close1"><i
-                                             class="ti ti-x fs-16"></i></a>
-                                 </div>
-                             </div>
-                         </li>
-                     </ul>
-                     <div class="p-3 empty-header-item1 border-top">
-                         <div class="d-grid">
-                             <a href="notification-list.html" class="btn btn-primary">View All</a>
-                         </div>
-                     </div>
-                     <div class="p-5 empty-item1 d-none">
-                         <div class="text-center">
-                             <span class="avatar avatar-xl avatar-rounded bg-secondary-transparent">
-                                 <i class="ri-notification-off-line fs-2"></i>
-                             </span>
-                             <h6 class="fw-semibold mt-3">No New Notifications</h6>
-                         </div>
-                     </div>
-                 </div>
-                 <!-- End::main-header-dropdown -->
-             </div>
+             <x-notifications-dropdown />
              <!-- End::header-element -->
 
              <!-- Start::header-element -->
@@ -245,19 +107,35 @@
                  <!-- End::header-link|dropdown-toggle -->
                  <ul class="main-header-dropdown dropdown-menu overflow-hidden header-profile-dropdown dropdown-menu-end"
                      aria-labelledby="mainHeaderProfile">
-                     <li>
-                         <a class="dropdown-item d-flex" href="{{ route('profile.show') }}">
-                             <i class="ti ti-user-circle fs-18 me-2 op-7"></i>حسابي
-                         </a>
-                     </li>
-                     <li>
-                         <form action="{{ route('logout') }}" method="POST" class="d-inline">
-                             @csrf
-                             <button class="dropdown-item d-flex" href="{{ route('logout') }}">
-                                 <i class="ti ti-logout fs-18 me-2 op-7"></i>تسحيل خروج
-                             </button>
-                         </form>
-                     </li>
+                     @if (auth()->guard('client')->check())
+                         <li>
+                             <a class="dropdown-item d-flex" href="{{ route('client.profile') }}">
+                                 <i class="ti ti-user-circle fs-18 me-2 op-7"></i>حسابي
+                             </a>
+                         </li>
+                         <li>
+                             <form action="{{ route('client.logout') }}" method="POST" class="d-inline">
+                                 @csrf
+                                 <button class="dropdown-item d-flex" href="{{ route('client.logout') }}">
+                                     <i class="ti ti-logout fs-18 me-2 op-7"></i>تسحيل خروج
+                                 </button>
+                             </form>
+                         </li>
+                     @elseif(auth()->check())
+                         <li>
+                             <a class="dropdown-item d-flex" href="{{ route('profile.show') }}">
+                                 <i class="ti ti-user-circle fs-18 me-2 op-7"></i>حسابي
+                             </a>
+                         </li>
+                         <li>
+                             <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                                 @csrf
+                                 <button class="dropdown-item d-flex" href="{{ route('logout') }}">
+                                     <i class="ti ti-logout fs-18 me-2 op-7"></i>تسحيل خروج
+                                 </button>
+                             </form>
+                         </li>
+                     @endif
                  </ul>
              </div>
              <!-- End::header-element -->
@@ -265,8 +143,8 @@
              <!-- Start::header-element -->
              <div class="header-element">
                  <!-- Start::header-link|switcher-icon -->
-                 <a href="javascript:void(0);" class="header-link settings-icon-header"
-                     data-bs-toggle="offcanvas" data-bs-target="#switcher-canvas">
+                 <a href="javascript:void(0);" class="header-link settings-icon-header" data-bs-toggle="offcanvas"
+                     data-bs-target="#switcher-canvas">
                      <svg class="header-link-icon" xmlns="http://www.w3.org/2000/svg"
                          xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="24" height="24"
                          viewBox="0 0 24 24">

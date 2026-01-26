@@ -4,6 +4,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\NotificationHelper;
 use App\Models\Document;
 use App\Models\LegalCase;
 use Illuminate\Http\Request;
@@ -39,6 +40,22 @@ class DocumentController extends Controller
             'description' => $request->description,
             'file_path' => $path,
             'mime_type' => $request->file('file')->getMimeType(),
+        ]);
+
+        foreach ($legalCase->users as $user) {
+            NotificationHelper::notify($user, [
+                'type' => 'document_added',
+                'title' => 'مستند جديد',
+                'message' => 'تم إضافة مستند جديد للقضية',
+                'url' => route('documents.index', $legalCase->id),
+            ]);
+        }
+
+        NotificationHelper::notify($legalCase->client, [
+            'type' => 'document_added',
+            'title' => 'مستند جديد',
+            'message' => 'تم إضافة مستند جديد لقضيتك',
+            'url' => route('client.documents.index'),
         ]);
 
         return redirect()->route('documents.index', $legalCase->id)->with('success', 'Document uploaded.');

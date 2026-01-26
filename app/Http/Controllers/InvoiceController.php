@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\NotificationHelper;
 use App\Models\Invoice;
-use App\Models\InvoiceItem;
 use App\Models\LegalCase;
-use App\Models\TimeEntry;
 use Illuminate\Http\Request;
 
 class InvoiceController extends Controller
@@ -29,6 +28,13 @@ class InvoiceController extends Controller
             'due_date' => $request->due_date,
             'status' => 'draft',
             'total_amount' => 0,
+        ]);
+
+        NotificationHelper::notify($legalCase->client, [
+            'type' => 'invoice_issued',
+            'title' => 'فاتورة جديدة',
+            'message' => 'تم إصدار فاتورة جديدة لقضيتك',
+            'url' => route('client.invoices.index'),
         ]);
 
         return redirect()->route('invoices.show', $invoice->id)->with('success', 'تم إنشاء الفاتورة بنجاح');

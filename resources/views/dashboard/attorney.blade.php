@@ -59,21 +59,6 @@
         </div>
 
     </div>
-
-    {{-- 🎯 CTAs --}}
-    <x-card class="mt-3">
-        <x-slot name="body">
-            <div class="d-flex gap-2">
-                <a href="{{ route('time-entries.create') }}" class="btn btn-primary">
-                    + تسجيل وقت
-                </a>
-
-                <a href="{{ route('legal-cases.index') }}" class="btn btn-outline-secondary">
-                    عرض قضاياي
-                </a>
-            </div>
-        </x-slot>
-    </x-card>
 @endsection
 
 @section('scripts')

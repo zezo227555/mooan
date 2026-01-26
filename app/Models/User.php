@@ -52,6 +52,16 @@ class User extends Authenticatable
 
     public function legalCases()
     {
-        return $this->belongsToMany(LegalCase::class)->withPivot('role')->withTimestamps();
+        return $this->belongsToMany(LegalCase::class, 'case_user')->withPivot('role')->withTimestamps();
+    }
+
+    public function notifications()
+    {
+        return $this->morphMany(Notification::class, 'notifiable')->latest();
+    }
+
+    public function unreadNotifications()
+    {
+        return $this->notifications()->whereNull('read_at');
     }
 }

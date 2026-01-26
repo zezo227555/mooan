@@ -1,5 +1,9 @@
 @extends('layouts.main-body-structer')
 
+@section('page-bg-title')
+    نظام معين لأدارة الشئون القانونية
+@endsection
+
 @section('page-title')
     لوحة تحكم الإدارة
 @endsection

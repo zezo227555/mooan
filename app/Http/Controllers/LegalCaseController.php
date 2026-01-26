@@ -4,10 +4,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\NotificationHelper;
 use App\Models\LegalCase;
 use App\Models\Client;
 use App\Models\CourtSpecification;
 use App\Models\LegalCaseTransfer;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class LegalCaseController extends Controller
@@ -17,11 +19,19 @@ class LegalCaseController extends Controller
         $courtSpecifications = CourtSpecification::where('active', true)->get();
 
         $cases = LegalCase::with(['client', 'courtSpecification'])
+            // 🔒 If attorney → only attached cases
+            ->when(auth()->user()->role === 'attorney', function ($query) {
+                $query->whereHas('users', function ($q) {
+                    $q->where('users.id', auth()->id());
+                });
+            })
+            // 🎯 Court filter (still applies)
             ->when($request->court_specification_id, function ($query) use ($request) {
                 $query->where('court_specification_id', $request->court_specification_id);
             })
             ->latest()
             ->get();
+
         return view('legal-cases.index', compact('cases', 'courtSpecifications'));
     }
 
@@ -48,6 +58,14 @@ class LegalCaseController extends Controller
             'case_number' => $request->case_number,
             'status' => $request->status,
             'court_specification_id' => $request->court_specification_id,
+        ]);
+
+        // after LegalCase::create(...)
+        NotificationHelper::notify(User::whereIn('role', ['admin', 'reception'])->get(), [
+            'type' => 'case_created',
+            'title' => 'قضية جديدة',
+            'message' => 'تم إنشاء قضية رقم ' . $legalCase->case_number,
+            'url' => route('legal-cases.show', $legalCase->id),
         ]);
 
         return redirect()->route('legal-cases.show', $legalCase->id)->with('success', 'تم إنشاء القضية بنجاح');
@@ -124,6 +142,15 @@ class LegalCaseController extends Controller
             'user_id' => auth()->id(),
             'reason' => $request->reason,
         ]);
+
+        foreach ($legalCase->users as $user) {
+            NotificationHelper::notify($user, [
+                'type' => 'case_transferred',
+                'title' => 'تم نقل القضية',
+                'message' => 'تم نقل القضية إلى محكمة أخرى',
+                'url' => route('legal-cases.show', $legalCase->id),
+            ]);
+        }
 
         return redirect()->route('legal-cases.show', $legalCase->id)->with('success', 'تم نقل القضية بنجاح إلى المحكمة الجديدة');
     }
