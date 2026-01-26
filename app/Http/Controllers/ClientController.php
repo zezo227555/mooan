@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class ClientController extends Controller
 {
@@ -31,6 +32,7 @@ class ClientController extends Controller
             'address' => 'nullable|string|max:255',
             'national_id' => 'nullable|string|max:50',
             'notes' => 'nullable|string',
+            'password' => 'required|string|min:8|confirmed',
         ]);
 
         Client::create($validated);
@@ -64,9 +66,15 @@ class ClientController extends Controller
             'address' => 'nullable|string|max:255',
             'national_id' => 'nullable|string|max:50',
             'notes' => 'nullable|string',
+            'password' => 'nullable|string|min:8',
         ]);
 
+        if (!empty($validated['password'])) {
+            $validated['password'] = Hash::make($validated['password']);
+        }
+
         $client->update($validated);
+
         return redirect()->route('clients.index')->with('success', 'Client updated successfully.');
     }
 

@@ -54,6 +54,21 @@
 
                     <div class="col-md-6">
                         <div class="form-floating mb-3">
+                            <input type="password" name="password" class="form-control" placeholder="كلمة المرور" required>
+                            <label>كلمة المرور</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
+                            <input type="password" name="password_confirmation" class="form-control"
+                                placeholder="تأكيد كلمة المرور" required>
+                            <label>تأكيد كلمة المرور</label>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-floating mb-3">
                             <div class="form-floating">
                                 <textarea class="form-control" placeholder="ملاحظات" name="notes"></textarea>
                                 <label for="floatingTextarea2">ملاحظات</label>

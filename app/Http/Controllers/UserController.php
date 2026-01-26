@@ -58,7 +58,7 @@ class UserController extends Controller
             'phone' => 'nullable|string|max:20',
             'role' => 'required|in:admin,attorney,reception',
             'is_active' => 'boolean',
-            'password' => 'nullable|string|min:8|confirmed',
+            'password' => 'nullable|string|min:8',
         ]);
 
         $data = [
